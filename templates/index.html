@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flash-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+</div>
+
+<header class="page-header">
+    <div class="header-text">
+        <h1>Your Collection</h1>
+        <p>Logged recipes and culinary experiments.</p>
+    </div>
+    
+    <a href="{{ url_for('create') }}" class="btn btn-primary">
+        <span>+</span> Add Recipe
+    </a>
+</header>
+
+<div class="recipe-grid">
+    {% for recipe in recipes %}
+    <div class="recipe-card">
+        <div class="card-main-info">
+            <span class="category-tag">{{ recipe.category }}</span>
+            <h3>{{ recipe.name }}</h3>
+            <div class="rating">
+                {% for i in range(recipe.rating|int) %}★{% endfor %}
+            </div>
+        </div>
+        
+        <div class="card-footer">
+            <a href="{{ url_for('view_recipe', recipe_id=recipe.id) }}" class="btn-text" style="color: var(--primary); font-weight: 700;">View details</a>
+            <div class="actions">
+                <a href="{{ url_for('edit', recipe_id=recipe.id) }}" class="edit-link" style="color: var(--dark); font-size: 0.9rem; margin-right: 12px; font-weight: 600;">Edit</a>
+                <a href="{{ url_for('delete', recipe_id=recipe.id) }}" 
+                   class="delete-link" 
+                   style="color: var(--danger); font-size: 0.9rem; font-weight: 600;"
+                   onclick="return confirmDelete('{{ recipe.name }}')">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="empty-state" style="text-align: center; padding: 4rem; background: white; border-radius: 12px; grid-column: 1 / -1;">
+        <h3>Your log is empty.</h3>
+        <p>Time to start cooking!</p>
+        <a href="{{ url_for('create') }}" class="btn btn-primary" style="margin-top: 1rem;">Add Your First Recipe</a>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+function confirmDelete(name) {
+    return confirm("Are you sure you want to delete '" + name + "'?");
+}
+
+// Fade out alerts after 3 seconds
+setTimeout(function() {
+    let alerts = document.querySelectorAll('.alert');
+    alerts.forEach(function(alert) {
+        alert.style.opacity = '0';
+        alert.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => alert.remove(), 500);
+    });
+}, 3000);
+</script>
+{% endblock %}

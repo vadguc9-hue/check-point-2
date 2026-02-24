@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="recipe-detail-container">
+    <header class="recipe-header">
+        <a href="{{ url_for('home') }}" class="back-link">← Back to Collection</a>
+        <div class="header-main">
+            <h1>{{ recipe.name }}</h1>
+            <div class="meta-tags">
+                <span class="tag category">{{ recipe.category }}</span>
+                <span class="tag rating">{{ "⭐" * recipe.rating|int }}</span>
+            </div>
+        </div>
+    </header>
+
+    <hr>
+
+    <div class="recipe-body">
+        <section class="ingredients">
+            <h3>Ingredients</h3>
+            <p>{{ recipe.ingredients | replace('\n', '<br>') | safe }}</p>
+        </section>
+
+        <section class="instructions">
+            <h3>Instructions</h3>
+            <div class="instruction-text">
+                {{ recipe.instructions | replace('\n', '<br>') | safe }}
+            </div>
+        </section>
+    </div>
+
+    <hr>
+
+    <footer class="recipe-footer">
+        <div class="danger-zone">
+            <a href="{{ url_for('edit', recipe_id=recipe.id) }}" class="btn btn-edit-large">Edit Recipe</a>
+            <a href="{{ url_for('delete', recipe_id=recipe.id) }}" 
+               class="btn btn-delete-large" 
+               onclick="return confirmDelete('{{ recipe.name }}')">Delete Permanently</a>
+        </div>
+    </footer>
+</div>
+{% endblock %}

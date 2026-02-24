@@ -1,0 +1,346 @@
+/* --- 1. VARIABLES & RESET (LUXURY VINTAGE THEME) --- */
+:root {
+    --primary: #102c26;       /* Deep Forest Green */
+    --primary-hover: #1a453b;
+    --dark: #102c26;          
+    --light: #f7e7ce;         /* Champagne Background */
+    --white: #fffdfa;         /* Off-white for cards/containers */
+    --accent: #d4a373;        /* Warm Bronze for icons/details */
+    --danger: #8b0000;        /* Deep Crimson for Delete */
+    --warning: #b8860b;       /* Dark Gold for Ratings */
+    --text-muted: #5d574f;    /* Warm Muted Brown */
+    --border-warm: #e0d1b8;   /* The "Secret" color that blends with champagne */
+    
+    --font-header: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--light);
+    color: var(--dark);
+    margin: 0;
+    line-height: 1.6;
+}
+
+a {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+}
+
+/* --- 2. LAYOUT & NAVIGATION --- */
+.container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.navbar {
+    background: var(--primary);
+    padding: 1.2rem 0;
+    box-shadow: 0 4px 15px rgba(16, 44, 38, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+
+.logo { 
+    font-family: var(--font-header);
+    font-weight: 700; 
+    font-size: 1.6rem; 
+    color: var(--light); 
+    letter-spacing: -0.5px;
+}
+
+.nav-links a {
+    color: var(--light);
+    font-weight: 600;
+    margin-left: 1.8rem;
+    opacity: 0.85;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+/* --- 3. UI POLISH (ALERTS & BUTTONS) --- */
+.flash-container {
+    position: relative;
+    width: 100%;
+    height: 0; 
+    z-index: 1100;
+}
+
+.alert {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 600px;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    background: var(--white);
+    border: 1px solid var(--border-warm);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    font-weight: 600;
+}
+
+.alert-success { border-left: 6px solid var(--primary); color: #065f46; }
+.alert-danger { border-left: 6px solid var(--danger); color: #991b1b; }
+
+.btn {
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary { 
+    background: var(--primary); 
+    color: var(--light); 
+    border: 1px solid transparent;
+}
+
+.btn-primary:hover { 
+    background: var(--light);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 44, 38, 0.15);
+}
+
+/* --- 4. HOME PAGE (TEXT-ONLY CARDS) --- */
+.page-header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;            
+    margin-bottom: 3.5rem;
+    padding-bottom: 1.8rem;
+    border-bottom: 2px solid var(--border-warm);
+}
+
+.header-text h1 {
+    font-family: var(--font-header);
+    font-size: 2.8rem;
+    color: var(--primary);
+    margin: 0;
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.recipe-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 2.5rem;
+    box-shadow: 0 5px 15px rgba(16, 44, 38, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 260px; /* Kept large for premium feel */
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid var(--border-warm);
+}
+
+.recipe-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(16, 44, 38, 0.12);
+    border-color: var(--primary);
+}
+
+.category-tag {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--warning);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.recipe-card h3 {
+    font-family: var(--font-header);
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin: 0.5rem 0;
+}
+
+.rating {
+    font-size: 1.2rem;
+    color: var(--warning);
+    margin-bottom: 1rem;
+}
+
+.card-footer {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f3e9d9;
+    padding-top: 1.5rem;
+}
+
+.btn-text { color: var(--primary); font-weight: 800; font-size: 1rem; }
+.edit-link { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+.delete-link { color: var(--danger); font-size: 0.9rem; font-weight: 600; }
+
+/* --- 5. RECIPE DETAIL VIEW (SIDEBAR & WRAP) --- */
+.recipe-detail-container {
+    background: var(--white);
+    padding: 4rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(16, 44, 38, 0.08);
+    border: 1px solid var(--border-warm);
+}
+
+.recipe-header .back-link {
+    color: var(--primary);
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.recipe-header .back-link:hover { transform: translateX(-6px); }
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.recipe-header h1 {
+    font-family: var(--font-header);
+    font-size: 3.2rem;
+    color: var(--primary);
+    margin: 0;
+    line-height: 1.1;
+}
+
+.recipe-body {
+    display: grid;
+    grid-template-columns: 280px 1fr; 
+    margin: 3rem 0;
+    border-top: 2px solid var(--border-warm);
+    padding-top: 3rem;
+}
+
+.ingredients {
+    padding-right: 3rem;
+    border-right: 2px solid var(--border-warm); /* THE VERTICAL LINE */
+}
+
+.instructions { padding-left: 4rem; min-width: 0; }
+
+.instruction-text {
+    white-space: pre-line;
+    color: #2c2925;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    word-break: break-word; /* THE WRAP FIX */
+    overflow-wrap: break-word;
+}
+
+/* --- 6. FORMS (THE POLISHED VERSION) --- */
+.form-container {
+    background: var(--white);
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 4rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-warm);
+}
+
+.form-group { margin-bottom: 2rem; }
+.form-group label {
+    display: block;
+    font-weight: 800;
+    margin-bottom: 0.8rem;
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 1.1rem;
+    border: 1px solid #d1c4ae;
+    border-radius: 10px;
+    background: #fffdfa;
+    font-size: 1.05rem;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(16, 44, 38, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem; /* THE BUTTON SPACING */
+    margin-top: 3rem;
+}
+
+/* --- 7. ANIMATIONS & ERROR STATES --- */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+}
+
+.shake { 
+    animation: shake 0.2s ease-in-out 0s 2; 
+    border: 2px solid var(--danger) !important; 
+}
+
+/* --- 8. RESPONSIVE (FLEXIBILITY CHECK) --- */
+@media (max-width: 900px) {
+    .recipe-body { grid-template-columns: 1fr; }
+    .ingredients { 
+        border-right: none; 
+        border-bottom: 2px solid var(--border-warm); 
+        padding-bottom: 3rem; 
+        padding-right: 0;
+        margin-bottom: 3rem;
+    }
+    .instructions { padding-left: 0; }
+}
+
+@media (max-width: 600px) {
+    .container { margin: 1rem auto; }
+    .page-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .header-text h1 { font-size: 2.2rem; }
+    .recipe-detail-container { padding: 2rem; }
+    .form-container { padding: 2rem; }
+    .form-actions { flex-direction: column; align-items: stretch; gap: 1rem; }
+}

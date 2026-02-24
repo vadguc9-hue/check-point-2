@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <header class="form-header">
+        <h1>Edit Recipe</h1>
+        <p>Updating: <strong>{{ recipe.name }}</strong></p>
+    </header>
+
+    <form action="{{ url_for('edit', recipe_id=recipe.id) }}" method="POST" class="recipe-form">
+        
+        <div class="form-group">
+            <label for="name">Recipe Name</label>
+            <input type="text" id="name" name="name" value="{{ recipe.name }}" required class="form-input">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select name="category" id="category" class="form-input">
+                    <option value="Breakfast" {% if recipe.category == 'Breakfast' %}selected{% endif %}>Breakfast</option>
+                    <option value="Lunch" {% if recipe.category == 'Lunch' %}selected{% endif %}>Lunch</option>
+                    <option value="Dinner" {% if recipe.category == 'Dinner' %}selected{% endif %}>Dinner</option>
+                    <option value="Dessert" {% if recipe.category == 'Dessert' %}selected{% endif %}>Dessert</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rating">Rating (1-5)</label>
+                <input type="number" id="rating" name="rating" min="1" max="5" value="{{ recipe.rating }}" class="form-input">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="ingredients">Ingredients</label>
+            <textarea id="ingredients" name="ingredients" required rows="6" class="form-input">{{ recipe.ingredients }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="instructions">Instructions</label>
+            <textarea id="instructions" name="instructions" required rows="8" class="form-input">{{ recipe.instructions }}</textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-save">Update Recipe</button>
+            <a href="{{ url_for('home') }}" class="btn-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
